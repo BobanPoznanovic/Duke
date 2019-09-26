@@ -51,7 +51,20 @@ public class AgentManagerBean implements AgentManager {
 	public List<AID> getRunningAgents() {
 		// TODO Auto-generated method stub
 		System.out.println("Gell all running agents");
-		return null;
+		
+		List<AID> runningAgents = null;
+		
+		if(agents==null)
+			initializeAgentMap();
+		
+		if(!agents.isEmpty()) {
+			runningAgents = new ArrayList<>();
+			for (Map.Entry<AID, Agent> entry : agents.entrySet()) {
+				runningAgents.add(entry.getKey());
+			}
+		}
+		
+		return runningAgents;
 	}
 
 	@Override
@@ -80,7 +93,7 @@ public class AgentManagerBean implements AgentManager {
 	@Override
 	public void stopAgent(AID aid) {
 		// TODO Auto-generated method stub
-		
+		agents.remove(aid);
 	}
 
 	public Map<AID, Agent> getAgents() {
