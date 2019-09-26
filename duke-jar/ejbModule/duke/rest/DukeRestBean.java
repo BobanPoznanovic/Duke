@@ -59,6 +59,7 @@ public class DukeRestBean implements DukeRest{
 	@Override
 	public void sendACLMessage(ACLMessage message) {
 		// TODO Auto-generated method stub
+		msg.post(message);
 		
 	}
 

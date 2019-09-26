@@ -1,6 +1,7 @@
 package duke.messagemanager;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,6 +28,20 @@ public class ACLMessage implements Serializable {
 	public Long replyBy;
 	
 	public ACLMessage() {
-		
+		this.performative = null;
+		this.sender = null;
+		this.receivers = new ArrayList<AID>();
+		this.replyTo = null;
+		this.content = "";
+		this.ContentObj = null;
+		this.userArgs = new HashMap<>();
+		this.language = "";
+		this.encoding = "";
+		this.ontology = "";
+		this.protocol = "";
+		this.converstationId = "";
+		this.replyWith = "";
+		this.inReplyTo = "";
+		this.replyBy = null;
 	}
 }
