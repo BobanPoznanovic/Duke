@@ -27,7 +27,7 @@ public class DukeRestBean implements DukeRest{
 	AgentManager agm;
 
 	@Override
-	public List<AgentType> getAvailableAgentClasses() {
+	public String getAvailableAgentClasses() {
 		// TODO Auto-generated method stub
 		return agm.getAvailableAgentClasses();
 	}
@@ -39,9 +39,9 @@ public class DukeRestBean implements DukeRest{
 	}
 
 	@Override
-	public AID startAgent(AgentType type, String name) {
+	public AID startAgent(AgentType type, String runtimeName) {
 		// TODO Auto-generated method stub
-		return agm.startAgent(type, name);
+		return agm.startAgent(type, runtimeName);
 	}
 
 	@Override

@@ -7,7 +7,9 @@ import javax.ws.rs.PathParam;
 
 public interface AgentManager extends Serializable{
 
-	public List<AgentType> getAvailableAgentClasses();
+	//public List<AgentType> getAvailableAgentClasses();
+	
+	public String getAvailableAgentClasses();
 	
 	public List<AID> getRunningAgents();
 	

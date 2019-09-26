@@ -1,6 +1,8 @@
 package duke.util;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
@@ -32,23 +34,30 @@ public class MyJndiTreeParser {
 		
 	}
 
-	public void parse() {
+	public List<AgentType> parse() throws NamingException {
+		
+		List<AgentType> result = new ArrayList<>();
 		
 		System.out.println("My JNDI parser");
 		
 		try {
 			NamingEnumeration<NameClassPair> list = ctx.list(myEXP);
 			while (list.hasMore()) {
-			  String module = list.next().getName();
-			  processModule("", module);
+				if(list.next() != null) {
+					String module = list.next().getName();
+					  processModule("", module, result);
+				}
+			  
 			}
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 		
+		return result;
+		
 	}
 	
-	public void processModule(String parentModule, String module) throws NamingException {
+	public void processModule(String parentModule, String module, List<AgentType> results) throws NamingException {
 		
 		NamingEnumeration<NameClassPair> list = null;
 		
@@ -71,11 +80,13 @@ public class MyJndiTreeParser {
 				NameClassPair ncp = list.next();
 				String ejbName = ncp.getName();
 				if(ejbName.contains("!")) {
-					//nasledjuje
-					checkIfImplementsAgent(ejbName);
+					AgentType newAgentType = checkIfImplementsAgent(module, ejbName);
+					if(newAgentType != null) {
+						results.add(newAgentType);
+					}
 				}
 				else {
-					processModule(module, ejbName);
+					processModule(module, ejbName, results);
 				}
 			}
 		}
@@ -83,15 +94,18 @@ public class MyJndiTreeParser {
 		
 	}
 	
-	public AgentType checkIfImplementsAgent(String ejbName) {
+	public AgentType checkIfImplementsAgent(String module, String ejbName) {
 		if(ejbName.endsWith(agentInterfacePath)) {
-			parseEjbName();
+			return parseEjbName(module, ejbName);
 		}
 		return null;
 	}
 	
-	public AgentType parseEjbName() {
-		AgentType agentType = null;
+	public AgentType parseEjbName(String module, String ejbName) {
+		AgentType agentType = new AgentType();
+		
+		agentType.setModule(module);
+		agentType.setName(ejbName);
 		
 		return agentType;
 	}

@@ -1,12 +1,19 @@
 package duke.agentmanager;
 
-public class AgentType {
+import java.io.Serializable;
+
+public class AgentType implements Serializable {
 
 	private String name;
 	private String module;
 	
 	public AgentType() {
-		
+		this("","");
+	}
+	
+	public AgentType(String module, String name) {
+		this.module = module;
+		this.name = name;
 	}
 
 	public String getName() {

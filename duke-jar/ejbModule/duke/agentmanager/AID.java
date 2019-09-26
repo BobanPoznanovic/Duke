@@ -1,15 +1,21 @@
 package duke.agentmanager;
 
-public class AID {
+import java.io.Serializable;
+
+public class AID implements Serializable {
 	
 	private String name;
 	private String host;
 	private AgentType type;
 	
 	public AID() {
-		name = "";
-		host = "";
-		type = null;
+		this("","",null);
+	}
+	
+	public AID(String name, String host, AgentType type) {
+		setName(name);
+		setHost("duke-ear");
+		setType(type);
 	}
 
 	public String getName() {
