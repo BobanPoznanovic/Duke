@@ -14,6 +14,9 @@ import javax.ws.rs.core.MediaType;
 import duke.agentmanager.AID;
 import duke.agentmanager.AgentManager;
 import duke.agentmanager.AgentType;
+import duke.messagemanager.ACLMessage;
+import duke.messagemanager.MessageManager;
+import duke.messagemanager.Performative;
 
 @Stateless
 @LocalBean
@@ -25,6 +28,9 @@ public class DukeRestBean implements DukeRest{
 	
 	@EJB
 	AgentManager agm;
+	
+	@EJB
+	MessageManager msg;
 
 	@Override
 	public List<AgentType> getAvailableAgentClasses() {
@@ -48,6 +54,18 @@ public class DukeRestBean implements DukeRest{
 	public void stopAgent(AID aid) {
 		// TODO Auto-generated method stub
 		agm.stopAgent(aid);
+	}
+
+	@Override
+	public void sendACLMessage(ACLMessage message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<String> getPerformatives() {
+		// TODO Auto-generated method stub
+		return msg.getPerformatives();
 	}
 
 }
