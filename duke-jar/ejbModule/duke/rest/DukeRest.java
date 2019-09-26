@@ -18,23 +18,23 @@ import duke.agentmanager.AgentType;
 public interface DukeRest {
 
 	@GET
-	@Path("/classes")
+	@Path("/agents/classes")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getAvailableAgentClasses(); //Return value was list of AgentType
+	public List<AgentType> getAvailableAgentClasses(); //Return value was list of AgentType
 	
 	
 	@GET
-	@Path("/running")
+	@Path("/agents/running")
 	public List<AID> getRunningAgents();
 	
 	@PUT
-	@Path("/running/{name}")
+	@Path("/agents/running/{name}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public AID startAgent(AgentType type, @PathParam("name") String runtimeName);
 	
 	@DELETE
-	@Path("/running")
+	@Path("/agents/running")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void stopAgent(AID aid);
 }

@@ -2,6 +2,7 @@ package duke.agentmanager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ public class AgentManagerBean implements AgentManager {
 	private MyJndiTreeParser jndi;
 
 	@Override
-	public String getAvailableAgentClasses() {
+	public List<AgentType> getAvailableAgentClasses() {
 		// TODO Auto-generated method stub
 		System.out.println("Get all available agent classes");
 		
@@ -44,7 +45,7 @@ public class AgentManagerBean implements AgentManager {
 			e.printStackTrace();
 		}
 		
-		return Integer.toString(retVal.size());
+		return retVal;
 	}
 
 	@Override
@@ -93,7 +94,23 @@ public class AgentManagerBean implements AgentManager {
 	@Override
 	public void stopAgent(AID aid) {
 		// TODO Auto-generated method stub
-		agents.remove(aid);
+		if(agents == null)
+			initializeAgentMap();
+		
+		if(agents.isEmpty())
+			return;
+			
+		Iterator<Map.Entry<AID, Agent>> iterator = agents.entrySet().iterator();
+		
+		while(iterator.hasNext()) {
+			Map.Entry<AID, Agent> entry = iterator.next();
+			
+			AID key = entry.getKey();
+			
+			if(key.getName().equals(aid.getName()) && key.getType().getName().equals(aid.getType().getName())) {
+				iterator.remove();
+			}
+		}
 	}
 
 	public Map<AID, Agent> getAgents() {

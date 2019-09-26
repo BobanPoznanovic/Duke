@@ -20,14 +20,14 @@ import duke.agentmanager.AgentType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Remote(DukeRest.class)
-@Path("/agents")
+@Path("")
 public class DukeRestBean implements DukeRest{
 	
 	@EJB
 	AgentManager agm;
 
 	@Override
-	public String getAvailableAgentClasses() {
+	public List<AgentType> getAvailableAgentClasses() {
 		// TODO Auto-generated method stub
 		return agm.getAvailableAgentClasses();
 	}
