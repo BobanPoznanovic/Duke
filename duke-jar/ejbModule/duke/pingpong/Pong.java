@@ -10,7 +10,7 @@ import duke.messagemanager.Performative;
 
 @Stateless
 @Remote(Agent.class)
-public class Ping extends XjafAgent{
+public class Pong extends XjafAgent{
 
 	/**
 	 * 
@@ -21,12 +21,11 @@ public class Ping extends XjafAgent{
 	public void handleMessage(ACLMessage message) {
 		// TODO Auto-generated method stub
 		if(message.performative == Performative.REQUEST) {
-			System.out.println("Ping Request performative");
+			System.out.println("Pong Request performative");
 		}
 		else if(message.performative == Performative.INFORM) {
-			System.out.println("Ping Inform performative");
+			System.out.println("Pong Inform performative");
 		}
-		
 	}
 
 }
