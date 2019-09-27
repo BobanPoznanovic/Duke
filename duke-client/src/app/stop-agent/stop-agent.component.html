@@ -1,0 +1,16 @@
+<form [formGroup]="stopAgentForm" (ngSubmit)="onSubmit()"> 
+
+    <div class="col-md-3">
+        <div class="form-group">
+            Select agent to stop:
+            <select formControlName="type">
+                <option [ngValue]="type" *ngFor="let type of runningAgents">
+                    {{ type.name }}
+                </option>
+            </select>
+        </div>
+    </div> 
+
+    <input type="submit" class="btn btn-primary btn-block" value="Send">
+
+</form>

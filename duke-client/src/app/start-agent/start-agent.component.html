@@ -1,0 +1,27 @@
+<form [formGroup]="startAgentForm" (ngSubmit)="onSubmit()"> 
+    
+        <div class="col-md-3">
+                <div class="form-group">
+                  Name:
+              
+                  <div class="form-field">
+                    <i class="icon icon-calendar2"></i>
+                    <input type="text" class="form-control date" formControlName="name">
+                  </div>
+                </div>
+              </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            Type:
+            <select formControlName="type">
+                <option [ngValue]="type" *ngFor="let type of agentClasses">
+                    {{ type.name }}
+                </option>
+            </select>
+        </div>
+    </div> 
+
+    <input type="submit" class="btn btn-primary btn-block" value="Send">
+
+</form>

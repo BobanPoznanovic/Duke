@@ -1,0 +1,26 @@
+<form [formGroup]="sendMessageForm" (ngSubmit)="onSubmit()">
+    
+    <div class="col-md-3">
+        <div class="form-group">
+            Sender:
+            <select formControlName="sender">
+                <option [ngValue]="sender" *ngFor="let sender of runningAgents">
+                    {{ sender.name }}
+                </option>
+            </select>
+        </div>
+    </div>  
+
+    <div class="col-md-3">
+        <div class="form-group">
+            Receiver:
+            <select formControlName="receiver">
+                <option [ngValue]="receiver" *ngFor="let receiver of runningAgents">
+                    {{ receiver.name }}
+                </option>
+            </select>
+        </div>
+    </div>  
+
+    <input type="submit" class="btn btn-primary btn-block" value="Send">
+</form>
